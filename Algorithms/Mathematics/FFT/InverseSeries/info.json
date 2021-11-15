@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Graph Counting",
+      "file": "problem-codeforces-graph-counting.cpp",
+      "url": "https://codeforces.com/gym/102268/problem/G",
+      "constraints": "n <= 500'000",
+      "time": "1.902 s",
+      "memory": "24700 KB"
+    },
+  ]
+}

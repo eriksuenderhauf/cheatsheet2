@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Escape Through Leaf",
+      "file": "problem-codeforces-escape-through-leaf.cpp",
+      "url": "https://codeforces.com/contest/932/problem/F",
+      "constraints": "n <= 2000000, q <= 2000000",
+      "time": "0.577 s",
+      "memory": "22.3 MB"
+    }
+  ]
+}

@@ -1,0 +1,691 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{enumitem}
+
+\geometry{left = 1cm, right = 1cm, top = 2cm, bottom = 1cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Technische Universität München}
+\rhead{\thepage}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{0}
+
+\setlist{nosep}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+	{-1ex plus -.5ex minus -.2ex}%
+	{0.5ex plus .2ex}%x
+	{\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+	{-1explus -.5ex minus -.2ex}%
+	{0.5ex plus .2ex}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+	{-1ex plus -.5ex minus -.2ex}%
+	{1ex plus .2ex}%
+	{\normalfont\small\bfseries}}
+\makeatother
+
+\definecolor{blue}{rgb}{0,0.4,1}
+\definecolor{green}{rgb}{0.4,0.7,0}
+\definecolor{orange}{rgb}{0.8,0.5,0}
+
+\lstdefinestyle{custom}{
+	tabsize=4,
+	showspaces=false,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	breaklines=true,
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{blue},
+	commentstyle=\color{green},
+	stringstyle=\color{orange},
+}
+\lstset{style=custom}
+
+\title{Team Reference Document, NWERC 2017}
+\author{Team TUMbling - TU München}
+\date{November 2017}
+
+\begin{document}
+	\begin{landscape}
+	\footnotesize
+	\begin{multicols}{2}
+	
+	\maketitle
+	
+	\thispagestyle{fancy}
+		
+	\begin{multicols}{3}
+		\tableofcontents
+	\end{multicols}
+	
+	\section{C++ Language}
+	
+		\subsection{Compiling}
+		
+		\lstset{language=bash}
+		
+		\lstinputlisting{code/11Compiling.sh}
+		
+		\subsection{Timing}
+		
+		\lstinputlisting{code/12Timing.sh}
+		
+		\subsection{Debugging}
+		
+		\lstinputlisting{code/13Debugging.sh}
+		
+		\subsection{Input and output}
+		
+		\lstset{language=C++}
+		
+		\lstinputlisting{code/14InputOutput.cpp}
+		
+		\subsection{Language specific functionalities}
+		
+		\lstinputlisting{code/15Language.cpp}
+	
+	\section{Data structures}
+	
+		\subsection{Union find disjoint sets}
+		
+		\begin{itemize}
+			\item Input: $n$ elements
+			\item Preprocessing: $O(n)$ time and space
+			\item Requesting the set of an element: $O(1)$ time and space
+			\item Requesting to merge two sets: $O(1)$ time and space
+			\item Requesting the size of a set: $O(1)$ time and space
+		\end{itemize}
+		
+		\lstinputlisting{code/21UnionFindDisjointSets.cpp}
+		
+		\subsection{Fenwick tree}
+		
+		\begin{itemize}
+			\item Input: $n$ elements with an associative operation which is reversible
+			\item Preprocessing: $O(n\log{n})$ time and $O(n)$ space
+			\item Requesting to change an element: $O(\log{n})$ time and $O(1)$ space
+			\item Requesting the result of the operation on all elements in the range $[l,r]$: $O(\log{n})$ time and $O(1)$ space
+			\item Output: the result of the operation on all elements in the range $[l,r]$
+		\end{itemize}
+		
+		\lstinputlisting{code/22FenwickTree.cpp}
+		
+		\subsection{Segment tree}
+		
+		\begin{itemize}
+			\item Input: $n$ elements with an associative operation (and other operations for ranges) (2D: $n^2$ elements)
+			\item Preprocessing: $O(n)$ time and space (2D: $O(n^2)$ time and space)
+			\item Requesting to change an element or interval: $O(\log{n})$ time and space (2D: $O(\log^2{n})$ time and $O(\log{n})$ space)
+			\item Requesting the result of the operation on all elements in the range $[l,r]$: $O(\log{n})$ time and space (2D: $O(\log^2{n})$ time and $O(\log{n})$ space)
+			\item Output: the result of the operation on all elements in the range $[l,r]$
+		\end{itemize}
+		
+		\lstinputlisting{code/23SegmentTree.cpp}
+		
+		\subsection{Persistent segment tree}
+		
+		\begin{itemize}
+			\item Input: $n$ elements with an associative operation (and other operations for ranges)
+			\item Preprocessing: $O(n)$ time and space
+			\item Requesting to change an element or interval: $O(\log{n})$ time and space
+			\item Requesting the result of the operation on all elements in the range $[l,r]$ for the version $v$ of the segment tree: $O(\log{n})$ time and space
+			\item Output: the result of the operation on all elements in the range $[l,r]$ for the version $v$ of the segment tree
+		\end{itemize}
+		
+		\lstinputlisting{code/24PersistentSegmentTree.cpp}
+		
+	\section{Dynamic programming}
+		
+		\subsection{Range maximum}
+		\label{sec:Range maximum}
+		
+		\begin{itemize}
+			\item Input: $n$ numbers
+			\item Preprocessing: $O(n\log{n})$ time and space
+			\item Requesting the maximum of all numbers in the range $[l, r]$: $O(1)$ time and space
+			\item Output: the maximum of all numbers in the range $[l, r]$
+		\end{itemize}
+		
+		\lstinputlisting{code/34RangeMaximum.cpp}
+		
+		\subsection{Longest increasing subsequence}
+		
+		\begin{itemize}
+			\item Input: $n$ numbers
+			\item Requesting the longest increasing subsequence: $O(n\log{k})$ time and $O(n)$ space
+			\item Output: the size $k$ of the longest increasing subsequence and its elements
+		\end{itemize}
+		
+		\lstinputlisting{code/36LongestIncreasingSubsequence.cpp}
+		
+		\subsection{Knapsack}
+		
+			\subsubsection{0-1 Knapsack}
+			
+			\begin{itemize}
+				\item Input: $n$ objects with values and weights
+				\item Requesting the maximum value of all subsets of objects with weight less than $k$: $O(n*k)$ time and $O(n*k)$ space
+				\item Output: the maximum value of all subsets of objects with weight less than $k$ and its elements
+			\end{itemize}
+			
+			\lstinputlisting{code/381Knapsack01.cpp}
+			
+			\subsubsection{Integer knapsack}
+			
+			\begin{itemize}
+				\item Input: $n$ objects with values, weights and amounts
+				\item Requesting the maximum value of all combinations of objects with weight less than $k$: $O(n*k)$ time and $O(n*k)$ space
+				\item Output: the maximum value of all combinations of objects with weight less than $k$ and its elements
+			\end{itemize}
+			
+			\lstinputlisting{code/382KnapsackInteger.cpp}
+			
+			\subsubsection{Unlimited integer knapsack}
+			
+			\begin{itemize}
+				\item Input: $n$ objects with values and weights
+				\item Requesting the maximum value of all combinations of objects with weight less than $k$: $O(n*k)$ time and $O(n*k)$ space
+				\item Output: the maximum value of all combinations of objects with weight less than $k$ and its elements
+			\end{itemize}
+			
+			\lstinputlisting{code/383KnapsackIntegerUnlimited.cpp}
+			
+		\subsection{Optimization}
+		
+			\subsubsection{Stack: maximum subarray}
+			
+			\begin{itemize}
+				\item Input: $n*m$ numbers
+				\item Requesting the maximum subarray: $O(n*m)$ time and space
+				\item Output: the size and position of the maximum subarray
+			\end{itemize}
+			
+			\lstinputlisting{code/391MaximumSubarray.cpp}
+		
+			\subsubsection{Deque: maximum in all ranges of a fixed size}
+			
+			\begin{itemize}
+				\item Input: $n$ numbers (2D: $n^2$ numbers)
+				\item Requesting the maximum in all ranges of size $k$: $O(n)$ time and $O(k)$ space (2D: $O(n^2)$ time and space)
+				\item Output: the maximum in all ranges of size $k$
+			\end{itemize}
+			
+			\lstinputlisting{code/392MaximumInAllRangesOfAFixedSize.cpp}
+			
+			\subsubsection{Stack}
+			
+			\begin{itemize}
+				\item Aim: find the optimum in the previous $n$ elements
+				\item Behavior of the optimum:
+				\begin{itemize}
+					\item For elements $i$ and $j$, where $i<j$, there exists some number $m_{i,j}$ of elements, so that while $n<m_{i,j}$, $j$ is the optimum, and when $n\ge m_{i,j}$, $i$ is the optimum
+					\item For elements $i$, $j$ and $k$, if $i$ is the optimum compared to $j$, and $j$ is the optimum compared to $k$, then $i$ is the optimum compared to $k$
+				\end{itemize}
+				\item Optimization:
+				\begin{itemize}
+					\item Usage of a stack with the optimum at the top and other possible optimums below
+					\item For elements $i$ and $j$ in the stack, where $i<j$, $j$ must be above $i$ in the stack
+					\item For elements $i$, $j$ and $k$ in the stack, where $i<j<k$, $m_{i,j}>m_{j,k}$
+					\item For each new element:
+					\begin{itemize}
+						\item For the top two elements $i$ and $j$ of the stack, where $i<j$, if $n\ge m_{i,j}$, pop $j$ of the stack
+						\item The optimum is now on the top of the stack
+						\item For the top two elements $i$ and $j$ of the stack, where $i<j$, and the new element $k$, if $m_{i,j}\le m_{j,k}$, pop $j$ of the stack
+						\item For the top element $i$ of the stack and the new element $j$, if $n<m_{i,j}$, push $j$ onto the stack
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		
+			\subsubsection{Deque}
+			
+			\begin{itemize}
+				\item Aim: find the optimum in the previous $n$ elements
+				\item Behavior of the optimum:
+				\begin{itemize}
+					\item For elements $i$ and $j$, where $i<j$, there exists some number $m_{i,j}$ of elements, so that while $n<m_{i,j}$, $i$ is the optimum, and when $n\ge m_{i,j}$, $j$ is the optimum
+					\item For elements $i$, $j$ and $k$, if $i$ is the optimum compared to $j$, and $j$ is the optimum compared to $k$, then $i$ is the optimum compared to $k$
+				\end{itemize}
+				\item Optimization:
+				\begin{itemize}
+					\item Usage of a deque with the optimum at the top and other possible optimums below
+					\item For elements $i$ and $j$ in the deque, where $i<j$, $i$ must be above $j$ in the deque
+					\item For elements $i$, $j$ and $k$ in the deque, where $i<j<k$, $m_{i,j}<m_{j,k}$
+					\item For each new element:
+					\begin{itemize}
+						\item For the top two elements $i$ and $j$ of the deque, where $i<j$, if $n\ge m_{i,j}$, pop $i$ of the deque
+						\item For the bottom element $i$ of the deque and the new element $j$, if $n\ge m_{i,j}$, pop $i$ of the deque
+						\item For the new element $i$, push $i$ onto the bottom of the deque
+						\item The optimum is now on the top of the deque
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		
+			\subsubsection{Binary search}
+			
+			\begin{itemize}
+				\item Aim: find the optimum in the previous $n$ elements
+				\item Behavior of the optimum: for elements $i$ and $j$, where $j$ is the optimum, without knowing the optimum, it is clear that either $i\le j$ or $j\le i$
+				\item Optimization:
+				\begin{itemize}
+					\item Begin with range $[0,n-1]$
+					\item For the range $[l,r]$ and elements $i$ and $m=(l+r)/2$, where $l+1<r$ and $i$ is the optimum, without knowing the optimum, if $m\le i$, then continue with $[m,r]$, else continue with $[l,m]$
+					\item For the range $[l,r]$, where $l\le r$ and $l+1\ge r$, choose the optimum
+				\end{itemize}
+			\end{itemize}
+			
+			\subsubsection{Pointer}
+			
+			\begin{itemize}
+				\item Aim: find the optimum in the previous $n$ elements
+				\item Behavior of the optimum:
+				\begin{itemize}
+					\item For elements $i$ and $j$, where $j$ is the optimum, without knowing the optimum, it is clear that either $i\le j$ or $j\le i$
+					\item For elements $i$ and $j$, where $i<j$, there exists some number $m_{i,j}$ of elements, so that while $n<m_{i,j}$, $i$ is the optimum, and when $n\ge m_{i,j}$, $j$ is the optimum
+					\item For elements $i$, $j$ and $k$, if $i$ is the optimum compared to $j$, and $j$ is the optimum compared to $k$, then $i$ is the optimum compared to $k$
+				\end{itemize}
+				\item Optimization:
+				\begin{itemize}
+					\item Begin with the optimum of the previous $n-1$ elements
+					\item For the current element $i$ and the next element $j$, if $n\ge m_{i,j}$, continue with $j$, else $i$ is the optimum
+				\end{itemize}
+			\end{itemize}
+			
+			\subsubsection{Convex hull trick}
+			
+			\begin{itemize}
+				\item Aim: find the optimum in the previous $n$ elements
+				\item Behavior of the optimum:
+				\begin{itemize}
+					\item For elements $i$ and $j$ there exists some threshold depending on one parameter of the new element, so that while the parameter is below the threshold, one of the elements is the optimum, and when the parameter is above the threshold, the other element is the optimum
+					\item For elements $i$, $j$ and $k$, if $i$ is the optimum compared to $j$, and $j$ is the optimum compared to $k$, then $i$ is the optimum compared to $k$
+				\end{itemize}
+				\item Optimization:
+				\begin{itemize}
+					\item Usage of a set with all possible optimums
+					\item For elements $i$ and $j$ in the set, where $i$ is the optimum below the threshold and $j$ is the optimum above the threshold, $i$ must be before $j$ in the set
+					\item For elements $i$, $j$ and $k$, where $i$ before $j$ and $j$ before $k$ in the set, the threshold of $i$ and $j$ must be below the threshold of $j$ and $k$
+					\item For each new element:
+					\begin{itemize}
+						\item Find the optimum with binary search
+						\item Find the position of the new element in the set with binary search
+						\item For the new element $j$ and the elements $i$ and $k$, where $i$ is the element before the position of $j$ and $k$ is the element after the position of $j$, if $i$ or $k$ doesn't exist or if the threshold of $i$ and $j$ is below the threshold of $j$ and $k$, insert $j$ into the set
+						\item If the new element was inserted into the set, for element $j$, where $j$ is the element before or after the new element, and the elements $i$ and $k$, where $i$ is the element before $j$ and $k$ is the element after $j$, if $i$, $j$ and $k$ exist and the threshold of $i$ and $j$ is above the threshold of $j$ and $k$, delete $j$ from the set
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		
+			\subsubsection{Divide and conquer}
+			
+			\begin{itemize}
+				\item Aim: find the optimum for $n$ new elements in the previous $m$ elements
+				\item Behavior of the optimum: for the new elements $i$ and $j$, where $i<j$, and their optimums $k$ and $l$, $k\le l$
+				\item Optimization:
+				\begin{itemize}
+					\item Begin with range $[0,n-1]$ and the possible optimums $[0,m-1]$
+					\item For the range $[l,r]$, the possible optimums $[lo,ro]$ and element $m=(l+r)/2$, where $l\le r$ find the optimum $i$ for $m$ in the range of possible optimums and continue with the range $[l,m-1]$ and the possible optimums $[lo,i]$ as well as with the range $[m+1,r]$ and the possible optimums $[i,ro]$
+					\item For the range $[l,r]$, where $l>r$, do nothing
+				\end{itemize}
+			\end{itemize}
+		
+			\subsubsection{Knuth optimization}
+			
+			\begin{itemize}
+				\item Aim: find the optimum for $n$ new elements in the previous $m$ elements
+				\item Behavior of the optimum: for the new element $i$ and some old elements $j$ and $k$, the optimum for the new element lies between the optimums for the old elements
+				\item Optimization: find the optimum between the optimums of the old elements
+			\end{itemize}
+	
+	\section{Graph}
+	
+		\subsection{Traversal}
+			
+			\subsubsection{Articulation points and bridges}
+			
+			\begin{itemize}
+				\item Input: undirected graph with $v$ vertices and $e$ edges
+				\item Find all articulation points and bridges: $O(v+e)$ time and space
+				\item Output: all articulation points and bridges
+			\end{itemize}
+			
+			\lstinputlisting{code/415GraphTraversalArticulationPointsBridges.cpp}
+			
+			\subsubsection{Strongly connected components}
+			
+			\begin{itemize}
+				\item Input: graph with $v$ vertices and $e$ edges
+				\item Find all strongly connected components: $O(v+e)$ time and $O(v)$ space
+				\item Output: all strongly connected components and their vertices
+			\end{itemize}
+			
+			\lstinputlisting{code/416GraphTraversalStronglyConnectedComponents.cpp}
+			
+		\subsection{Minimum spanning tree}
+			
+		\begin{itemize}
+			\item Input: undirected graph with $v$ vertices and $e$ edges with weights
+			\item Find the minimum spanning tree: $O(e\log{v})$ time and $O(e)$ space
+			\item Output: the minimum spanning tree and its cost
+		\end{itemize}
+		
+		\lstinputlisting{code/42MinimumSpanningTree.cpp}
+		
+		\subsection{Shortest path}
+			
+			\subsubsection{Shortest path faster algorithm}
+			
+			\begin{itemize}
+				\item Input: graph with $v$ vertices and $e$ edges with weights
+				\item Find the shortest path from vertex $i$ to vertex $j$: $O(v*e)$ time and $O(v)$ space
+				\item Output: the shortest path from vertex $i$ to vertex $j$ and its cost
+			\end{itemize}
+			
+			\lstinputlisting{code/432ShortestPathFasterAlgorithm.cpp}
+			
+			\subsubsection{Floyd Warshall}
+			
+			\begin{itemize}
+				\item Input: graph with $v$ vertices and $e$ edges with weights
+				\item Preprocessing: $O(v^3)$ time and $O(v^2)$ space
+				\item Find the shortest path from vertex $i$ to vertex $j$: $O(1)$ time and space
+				\item Output: the shortest path from vertex $i$ to vertex $j$ and its cost
+			\end{itemize}
+			
+			\lstinputlisting{code/434ShortestPathFloydWarshall.cpp}
+			
+		\subsection{Flow}
+		
+			\subsubsection{Max flow}
+		
+			\begin{itemize}
+				\item Input: graph with $v$ vertices, $e$ edges with capacities, a source $s$ and a sink $t$
+				\item Find the maximum flow from $s$ to $t$: $O(e*v^2)$ time and $O(v+e)$ space
+				\item Output: the maximum flow from $s$ to $t$
+			\end{itemize}
+			
+			\lstinputlisting{code/441MaxFlow.cpp}
+			
+			\subsubsection{Min cost max flow}
+			
+			\begin{itemize}
+				\item Input: graph with $v$ vertices, $e$ edges with capacities and costs, a source $s$ and a sink $t$
+				\item Find the maximum flow with minimum costs from $s$ to $t$: $O(v^2*e^2)$ time and $O(v+e)$ space
+				\item Output: the maximum flow with minimum costs from $s$ to $t$
+			\end{itemize}
+			
+			\lstinputlisting{code/442MinCostMaxFlow.cpp}
+		
+		\subsection{Max cardinality bipartite matching}
+		
+		\begin{itemize}
+			\item Input: bipartite graph with $v$ vertices and $e$ edges
+			\item Find the maximum cardinality matching: $O(v*e)$ time and $O(v)$ space
+			\item Output: the maximum cardinality matching
+		\end{itemize}
+		
+		\lstinputlisting{code/45MaxCardinalityBipartiteMatching.cpp}
+		
+		\subsection{Euler path and tour}
+		
+			\subsubsection{Euler path and tour on undirected graph}
+			
+			\begin{itemize}
+				\item Input: undirected graph with $v$ vertices and $e$ edges
+				\item Find an Euler path or tour: $O(v+e)$ time and $O(v+e)$ space
+				\item Output: an Euler path or tour
+			\end{itemize}
+			
+			\lstinputlisting{code/461EulerPathTourUndirectedGraph.cpp}
+			
+			\subsubsection{Euler path and tour on directed graph}
+			
+			\begin{itemize}
+				\item Input: directed graph with $v$ vertices and $e$ edges
+				\item Find an Euler path or tour: $O(v+e)$ time and $O(v+e)$ space
+				\item Output: an Euler path or tour
+			\end{itemize}
+			
+			\lstinputlisting{code/462EulerPathTourDirectedGraph.cpp}
+		
+		\subsection{Lowest common ancestor}
+		
+		\begin{itemize}
+			\item Input: tree with $v$ vertices
+			\item Preprocessing: $O(v\log{v})$ time and space for range maximum in section \ref{sec:Range maximum}
+			\item Find the lowest common ancestor of two vertices: $O(1)$ time and space
+			\item Output: the lowest common ancestor of the two vertices
+		\end{itemize}
+		
+		\lstinputlisting{code/47LowestCommonAncestor.cpp}
+		
+	\section{String}
+	
+		\subsection{Trie}
+		
+		\begin{itemize}
+			\item Input: $n$ strings of combined length $m$
+			\item Preprocessing: $O(m)$ time and space
+			\item Requesting to insert or delete a string of length $l$ from the trie: $O(l)$ time and space
+			\item Requesting, whether a string of length $l$ is in the trie: $O(l)$ time and space
+		\end{itemize}
+		
+		\lstinputlisting{code/51Trie.cpp}
+		
+		\subsection{Suffix array}
+		
+		\begin{itemize}
+			\item Input: string of length $n$
+			\item Preprocessing: $O(n\log{n})$ time and $O(n)$ space
+			\item Requesting the matches of a pattern of length $m$ in the string: $O(m\log{n})$ time and $O(1)$ space
+			\item Requesting the longest repeating substring: $O(n)$ time and space
+		\end{itemize}
+		
+		\lstinputlisting{code/52SuffixArray.cpp}
+		
+		\subsection{String matching}
+		
+		\begin{itemize}
+			\item Input: string of length $n$ and a pattern of length $m$
+			\item Find the matches of the pattern in the string: $O(n+m)$ time and $O(1)$ space
+			\item Output: the matches of the pattern in the string
+		\end{itemize}
+		
+		\lstinputlisting{code/53StringMatching.cpp}
+		
+		\subsection{Z-Algorithm}
+		
+		\lstinputlisting{code/ZAlgorithm.cpp}
+		
+		\subsection{Dynamic programming}
+		
+			\subsubsection{String alignment}
+			
+			\begin{itemize}
+				\item Input: strings $a$ and $b$ of length $n$ and $m$ and costs for inserting, deleting, changing and keeping characters
+				\item Find the smallest cost to change $a$ to $b$: $O(n*m)$ time and space
+				\item Output: the smallest cost to change $a$ to $b$
+			\end{itemize}
+			
+			\lstinputlisting{code/541StringAlignment.cpp}
+			
+			\subsubsection{Longest palindrome}
+			
+			\begin{itemize}
+				\item Input: string of length $n$
+				\item Find the longest palindrome: $O(n)$ time and space
+				\item Output: the longest palindrome
+			\end{itemize}
+			
+			\lstinputlisting{code/542LongestPalindrome.cpp}
+			
+	\section{Mathematics}
+	
+		\subsection{Theorems}
+		
+			\subsubsection{Fibonacci numbers}
+			
+			\begin{itemize}
+				\item Definition:
+				\begin{itemize}
+					\item $f_{0}=0$
+					\item $f_{1}=1$
+					\item $f_{i}=f_{i-1}+f_{i-2}$
+				\end{itemize}
+				\item Calculation:
+				\begin{itemize}
+					\item Dynamic programming: $O(n)$
+					\item Fast matrix exponentiation: $O(\log{n})$
+					\item $\begin{bmatrix}1&1\\1&0\end{bmatrix}^{n}=\begin{bmatrix}f_{n+1}&f_{n}\\f_{n}&f_{n-1}\end{bmatrix}$
+				\end{itemize}
+			\end{itemize}
+		
+			\subsubsection{Binomial coefficients}
+			
+			\begin{itemize}
+				\item Definition:
+				\begin{itemize}
+					\item $\binom{n}{k}=\frac{n!}{k!(n-k)!}$
+					\item $\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$
+				\end{itemize}
+				\item Calculation: dynamic programming: $O(n*k)$
+			\end{itemize}
+		
+			\subsubsection{Fast exponentiation}
+			
+			\begin{itemize}
+				\item $x^{n}=\begin{cases}
+				x&\text{if }n=1\\{(x^{\frac{n}{2}})}^{2}&\text{if }2\mid n\\x^{n-1}*x&\text{otherwise}
+				\end{cases}$
+			\end{itemize}
+			
+			\subsubsection{Euler’s theorem}
+			For any planar graph, $V - E + F = 1 + C$, where $V$ is the number of graph's vertices, $E$ is the number of edges, $F$ is the number of faces in graph's planar drawing, and $C$ is the number of connected components. Corollary: $V-E+F=2$ for a 3D polyhedron.
+			
+			\subsubsection{Vertex covers and independent sets}
+			Let $M, C, I$ be a max matching, a min vertex cover, and a max independent set. Then $|M| \le |C| = N -|I|$, with equality for bipartite graphs. Complement of an MVC is always a MIS, and vice versa. Given a bipartite graph with partitions $(A,B)$, build a network: connect source to $A$, and $B$ to sink with edges of capacities, equal to the corresponding nodes' weights, or 1 in the unweighted case. Set capacities of the original graph's edges to the infinity.
+			Let $(S, T)$ be a minimum $s-t$ cut. Then a maximum(-weighted) independent set is $I = (A \cap S)\cup(B \cap T)$,
+			and a minimum(-weighted) vertex cover is $C = (A - T) \cup (B \cap S)$.
+			
+			\subsubsection{2-SAT}
+			Build an implication graph with 2 vertices for each variable - for the variable and its inverse; for each clause $x \lor y$ add edges $(\neg x, y)$ and $(\neg y, x)$. The formula is satisfiable if $x$ and $\neg x$ are in distinct SCCs, for all $x$. To find a satisfiable assignment, consider the graph's SCCs in topological order from
+			sinks to sources (i.e. Kosaraju's last step), assigning `true' to all variables of the current SCC (if it hasn't been previously assigned `false'), and `false' to all inverses.
+			
+			\subsubsection{Pick’s theorem}
+			$I = A - B/2 + 1$, where $A$ is the area of a lattice polygon, $I$ is number of lattice points inside it, and $B$ is number of lattice points on the boundary. Number of lattice points minus one on a line segment from $(0, 0)$ and $(x, y)$ is $gcd(x, y)$.
+			
+			\subsubsection{Combinatorics}
+			\bgroup
+			\def\arraystretch{1.2}
+			\begin{tabular}{l l}
+				$\sum_{k=0}^n k=n(n+1)/2$&	$\sum_{k=a}^b k=(a+b)(b-a+1)/2$\\
+				$\sum_{k=0}^n k^2=n(n+1)(2n+1)/6$&	$\sum_{k=0}^n k^3=n^2(n+1)^2/4$\\
+				$\sum_{k=0}^n k^4=(6n^5+15n^4+10n^3-n)/30$&	$\sum_{k=0}^n k^5=(2n^6+6n^5+5n^4-n^2)/12$\\
+				$\sum_{k=0}^n x^k=(x^{n+1}-1)/(x-1)$&	$\sum_{k=0}^n kx^k=(x-(n+1)x^{n+1}+nx^{n+2})/(x-1)^2$\\
+				$\sum_{m=0}^n \binom{m}{k} = \binom{n+1}{k+1}$&	$\sum_{k=0}^m \binom{n+k}{k} = \binom{n+m+1}{m}$\\
+				$\sum_{k=0}^n \binom{n}{k}^2 = \binom{2*n}{n}$&	$\sum_{k=1}^n k\binom{n}{k} = n2^{n-1}$\\
+				Fibonacci's number:& Catalan's number:\\
+				$\sum_{k=0}^n \binom{n-k}{k} = F_{n+1}$&	$c_n = \sum_{k=0}^{n-1} c_k\,c_{n-1-k} = \frac{1}{n+1} \binom{2n}{n}$ 
+			\end{tabular}
+			
+			\subsubsection{Burnside's Lemma}
+			$ClassesCount = \frac{1}{|G|} \sum_{g \in G} |X^g|$,\newline
+			$G$: group of operations(invariant permutations) \newline
+			$X^g$: set of fixed points for operation $g$, i.e. $X^g = \{x \in X: g.x=x \}$ \newline
+			special case: $ClassesCount = \frac{1}{|G|} \sum_{g \in G} k^{c(g)}$, \newline
+			$k$: "number of colors" \newline
+			$c(g)$: number of cycles in permutation $g$ \newline 
+			
+			\subsubsection{Multinomial coefficients}
+			$(x_1+x_2+...+x_m)^n = \sum_{k_1+k_2+...+k_m=n, k_i \geq 0} \binom{n}{k_1,k_2,...,k_m} x_1^{k_1}...x_m^{k_m}$, where $\binom{n}{k_1,k_2,...,k_m} = \frac{n!}{k_1! k_2! ... k_m!}$ \newline
+			in combinatorial sense $\binom{n}{k_1,...,k_m}$ is equal to the number of ways of depositing $n$ distinct objects into $m$ distinct bins, with $k_1$ objects in the first bin, $k_2$ objects in the second bin ...
+			
+			\subsubsection{Gray's code}
+			direct: $G(n) = n \oplus (n>>1)$ \newline
+			recurrent: $G(n) = 0G(n-1) \cup 1G(n-1)^R$ and $G(n)^R = 1G(n-1) \cup 0G(n-1)^R$
+			
+		\subsection{Game theory}
+		
+			\subsubsection{Grundy's function}
+			For all transitions $v -> v_i$ compute the Grundy's function $f(v_i)$: \newline
+			1. $v -> v_i$ transtion into one game, then compute $f(v_i)$ recursively \newline
+			$v -> v_i$ transition into sum of several games, compute $f$ for each game and take $\oplus$ sum of their values \newline
+			2. $f(v) = mex\{f(v_1),...,f(v_k)\}$ ($mex$ returns minimal number not contained in the set)
+			
+		\subsection{Algebra}
+		
+			\subsubsection{Euler's function}
+			$\phi(n) = n(1-\frac{1}{p_1})...(1-\frac{1}{p_k})$ where $n = p_1^{a_1}...p_k^{a_k}$ \newline Theorem: $a^{\phi(m)} = 1\ (mod\,m)$ if $gcd(a,m)=1$
+			\egroup
+	
+		\subsection{Prime numbers}
+		
+		\begin{itemize}
+			\item Input: number $n$
+			\item Find all prime numbers $p\le n$: $O(n)$ time and space
+			\item Output: all prime numbers $p\le n$
+		\end{itemize}
+		
+		\lstinputlisting{code/62PrimeNumbers.cpp}
+		
+		\subsection{GCD, LCM and extended Euclid}
+		
+		\begin{itemize}
+			\item Find the greatest common divisor of $a$ and $b$
+			\item Find the lowest common multiple of $a$ and $b$
+			\item Solve the linear Diophantine equation $a*x+b*y=s$
+		\end{itemize}
+		
+		\lstinputlisting{code/63GreatestCommonDivisorLowestCommonMultipleExtendedEuclid.cpp}
+		
+		\subsection{Rabin Miller}
+		
+		\lstinputlisting{code/RabinMiller.cpp}
+		
+		\subsection{Fast Fourier Transformation}
+		
+		\lstinputlisting{code/FFT.cpp}
+		
+	\section{Geometry}
+	
+	\lstinputlisting{code/7Geometry.cpp}
+	
+	\section{Extra Graph}
+	
+		\subsection{MinCostMaxFlow}
+		
+		\lstinputlisting{code/MinCostMaxFlow.cpp}
+		
+		\subsection{PushRelabel}
+		
+		\lstinputlisting{code/PushRelabel.cpp}
+		
+		\subsection{MinCostMatching}
+		
+		\lstinputlisting{code/MinCostMatching.cpp}
+		
+		\subsection{MinCut}
+		
+		\lstinputlisting{code/MinCut.cpp}
+	
+	
+	\end{multicols}
+	\end{landscape}
+		
+\end{document}

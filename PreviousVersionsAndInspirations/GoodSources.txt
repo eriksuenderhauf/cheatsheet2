@@ -1,0 +1,5 @@
+Cheat sheet of team Omogen Heap (KTH/2017):
+https://github.com/kth-competitive-programming/kactl
+
+General algorithmic library:
+https://github.com/zimpha/algorithmic-library

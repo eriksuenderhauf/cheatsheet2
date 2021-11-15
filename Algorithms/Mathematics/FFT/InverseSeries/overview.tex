@@ -1,0 +1,5 @@
+\begin{itemize}
+	\item Calculates the first $2^{\lfloor\log n\rfloor+1}$ coefficients of the series $\frac{1}{A(x)}$ where $A(x)=1+..$ is a polynomial.
+	\item Therefore the polynomials $B_k\equiv B_{k-1}(2-AB_{k-1})\mod x^{2^k}$ are calculated with $AB_k\equiv1\mod x^{2^k}$.
+	\item Runtime $O\left(n \log n\right)$.
+\end{itemize}

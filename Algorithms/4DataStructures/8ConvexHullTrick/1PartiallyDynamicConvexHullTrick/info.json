@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Cats Transport",
+      "file": "problem-codeforces-cats-transport.cpp",
+      "url": "https://codeforces.com/contest/311/problem/B",
+      "constraints": "n <= 10000000, q <= 10000000",
+      "time": "0.81 s",
+      "memory": "11.9 MB"
+    }
+  ]
+}

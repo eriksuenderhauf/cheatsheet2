@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Sum of Floor of Linear",
+      "file": "program.cpp",
+      "url": "https://judge.yosupo.jp/problem/sum_of_floor_of_linear",
+      "constraints": "N,M,A,B <= 10^9, T <= 10^5",
+      "time": "0.103 s",
+      "memory": "1.80 MB"
+    }
+  ]
+}

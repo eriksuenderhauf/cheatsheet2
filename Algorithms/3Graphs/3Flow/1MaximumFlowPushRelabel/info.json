@@ -1,0 +1,20 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Delivery Bears",
+      "file": "problem-codeforces-delivery-bears.cpp",
+      "url": "https://codeforces.com/problemset/problem/653/D",
+      "constraints": "n <= 1000, m <= 10000",
+      "time": "0.031 s",
+      "memory": "0.3 MB"
+    },
+    {
+      "problem": "CodeChef Cleaning the Space",
+      "file": "problem-codechef-cleaning-the-space.cpp",
+      "url": "https://www.codechef.com/problems/SPCLN",
+      "constraints": "n <= 10000, m <= 10000",
+      "time": "0.0 s",
+      "memory": "15.9 MB"
+    }
+  ]
+}

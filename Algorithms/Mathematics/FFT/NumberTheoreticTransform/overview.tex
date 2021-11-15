@@ -1,0 +1,12 @@
+\begin{itemize}
+	\item Requirements:
+	\begin{itemize}
+		\item $\operatorname{MOD}$ must be prime.
+		\item $\operatorname{root}$ must have order $\operatorname{root_{pw}}$ modulo $\operatorname{MOD}$.
+		\item $n = a.\operatorname{size}()$ must be a power of 2.
+	\end{itemize}
+	\item E.g. if $\operatorname{MOD} = c2^k + 1$, then $g^c$ has order $2^k$, where $g$ is a primitive root modulo $\operatorname{MOD}$.
+	\item If $\operatorname{invert} = \operatorname{false}$, the function evaluates the polynomial of degree $n - 1$ (given by the $n$ coefficients in $a$) at the $n$ roots of unity (i.e. at $\operatorname{root}^1, \operatorname{root}^2, \dots, \operatorname{root}^n \equiv 1$).
+	\item If $\operatorname{invert} = \operatorname{true}$, the function computes the $n$ coefficients of the polynomial determined by the points in $a$.
+	\item Runtime $O\left(n \log n\right)$. In practice slower than regular FFT.
+\end{itemize}

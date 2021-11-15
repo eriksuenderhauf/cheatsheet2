@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces The Doctor Meets Vader",
+      "file": "problem-codeforces-the-doctor-meets-vader.cpp",
+      "url": "https://codeforces.com/contest/1184/problem/B2",
+      "constraints": "n <= 1000, m <= 1000000",
+      "time": "0.078 s",
+      "memory": "4 MB"
+    }
+  ]
+}

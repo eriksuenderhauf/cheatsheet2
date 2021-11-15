@@ -1,0 +1,6 @@
+\begin{itemize}
+	\item $\phi \left(n\right)$ counts the number of integers between 1 and $n$ inclusive, which are coprime to $n$
+	\item Let $n = p_1^{a_1} \cdot \dots \cdot p_k^{a_k}$ be the prime decomposition of $n$, then $\phi \left(n\right) =  \prod_{i = 1}^{k}p_i^{a_i - 1}\left(p_i - 1\right)$
+	\item if $gcd\left(a, m\right) = 1$, then $a^{\phi(m)} \equiv 1 \mod m$ and thus, $a^{b} \equiv a^{b\mod  \phi \left(m\right)}\mod m$ 
+	\item For arbitrary integers $a, m$ and $b \geq  \log_2m$ it holds that $a^b\equiv a^{ \phi \left(m\right) + \left[b \operatorname{mod}  \phi \left(m\right)\right]} \operatorname{mod} m$
+\end{itemize}

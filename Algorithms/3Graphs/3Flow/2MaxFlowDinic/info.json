@@ -1,0 +1,19 @@
+{
+  "verification": [
+    {
+      "problem": "Kattis Jupiter Orbiter",
+      "file": "problem-kattis-jupiter-orbiter.cpp",
+      "url": "https://open.kattis.com/problems/jupiter",
+      "constraints": "n <= 1800, m <= 3600",
+      "time": "0.0 s"
+    },
+    {
+      "problem": "Codechef Robots in a DAG",
+      "file": "problem-codechef-robots-in-a-dag.cpp",
+      "url": "https://www.codechef.com/problems/ROBOTDAG",
+      "constraints": "n <= 10000, m <= 100000, unit network",
+      "time": "0.24 s",
+      "memory": "18.3 MB"
+    },
+  ]
+}

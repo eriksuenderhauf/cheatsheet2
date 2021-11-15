@@ -1,0 +1,20 @@
+{
+  "verification": [
+    {
+      "problem": "SPOJ Fenwick Trees",
+      "file": "problem-spoj-fenwick-trees.cpp",
+      "url": "https://www.spoj.com/problems/FENTREE/",
+      "constraints": "n <= 1000000, q <= 300000",
+      "time": "0.36 s",
+      "memory": "5.2 MB"
+    },
+    {
+      "problem": "SPOJ D-query",
+      "file": "problem-spoj-d-query.cpp",
+      "url": "https://www.spoj.com/problems/DQUERY/",
+      "constraints": "n <= 30000, q <= 200000",
+      "time": "0.28 s",
+      "memory": "10 MB"
+    }
+  ]
+}

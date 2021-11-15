@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Hafnian of Matrix",
+      "file": "program.cpp",
+      "url": "https://judge.yosupo.jp/problem/hafnian_of_matrix",
+      "constraints": "N <= 38",
+      "time": "0.664 s",
+      "memory": "1.18 MB"
+    }
+  ]
+}

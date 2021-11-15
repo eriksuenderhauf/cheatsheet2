@@ -1,0 +1,53 @@
+{
+  "verification": [
+    {
+      "problem": "AOJ Spaceships",
+      "file": "problem-aoj-spaceships.cpp",
+      "url": "https://joisc2013-day4.contest.atcoder.jp/tasks/joisc2013_spaceships",
+      "constraints": "n <= 1000000, q <= 1000000",
+      "time": "4.097 s",
+      "memory": "59.264 MB"
+    },
+    {
+      "problem": "SPOJ Dynamic LCA",
+      "file": "problem-spoj-dynamic-lca.cpp",
+      "url": "https://www.spoj.com/problems/DYNALCA/",
+      "constraints": "n <= 100000, q <= 100000",
+      "time": "1.92 s",
+      "memory": "8.6 MB"
+    },
+    {
+      "problem": "SPOJ Dynamic Tree Connectivity",
+      "file": "problem-spoj-dynamic-tree-connectivity.cpp",
+      "url": "https://www.spoj.com/problems/DYNACON1/",
+      "constraints": "n <= 100000, q <= 100000",
+      "time": "0.59 s",
+      "memory": "8.6 MB"
+    },
+    {
+      "problem": "CodeChef Virus Attack",
+      "file": "problem-codechef-virus-attack.cpp",
+      "url": "https://www.codechef.com/problems/MCO16406",
+      "constraints": "n <= 100000, q <= 100000",
+      "time": "0.54 s",
+      "memory": "15.7 MB"
+    },
+    {
+      "problem": "CodeChef Chef and Graph Queries",
+      "file": "problem-codechef-chef-and-graph-queries.cpp",
+      "url": "https://www.codechef.com/problems/GERALD07",
+      "constraints": "n <= 200000, q <= 200000",
+      "time": "0.46 s",
+      "memory": "27.1 MB"
+    },
+    {
+      "problem": "CodeChef Chef and Tree",
+      "file": "problem-codechef-chef-and-tree.cpp",
+      "url": "https://www.codechef.com/problems/CHEFTREE",
+      "constraints": "n <= 100000, q <= 100000",
+      "time": "0.63 s",
+      "memory": "20.4 MB"
+    }
+  ],
+  "unsolved problems": ["https://dmoj.ca/problem/ds5", "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=229&page=show_problem&problem=3149", "https://www.codechef.com/problems/SBSWAP", "https://www.codechef.com/problems/RIVER", "https://www.codechef.com/problems/QTREE6"]
+}

@@ -1,0 +1,29 @@
+\noindent\textbf{Selected prime numbers:}
+\begin{itemize}
+	\item The first 25: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+	\item $\geq 100$: 101, 211 (47th), 307 (63th), 503 (96th), 997 
+	\item $\geq 10^3$: 1009 (169th), 2003, 3001, 4001, 5003, 7001%, 9973 (1229th)
+	\item $\geq 10^4$: 10,007 (1230th), 10,009, 20,011, 50,021%, 99991 (9592th)
+	\item $\geq 10^5$: 100,003 (9593th), 100,019, 200,003, 500,009%, 999983 (78498th)
+	\item $\geq 10^6$: 1,000,003 (78,499th), 2,000,003, 5,000,011%, 99,99,991 (664579th)
+	\item $\geq 10^7$: $10^7 + 19$ (664,580th), 20,000,003, 50,000,017%, 99.999.989 (5761455th)
+	\item $\geq 10^8$: $10^8 + 7$ (5,761,456th), 200,000,033, 500,000,003
+	\item $\geq 10^9$: $10^9 + 7$ (50,847,535th), $10^9 + 9$, $10^{10} + 19$
+	\item All Fermat primes (of form $2^{2^n} + 1$): 3, 5, 17, 257, 65,537
+\end{itemize}
+
+\noindent\textbf{The enumeration algorithm:}
+\begin{itemize}
+	\item For a given $n$ \lstinline{sieve(n)} runs in $O(n)$ time and space
+	\item For a given $n$ \lstinline{moebius(n)} runs in $O(n\log n)$ time and $O(n)$ space
+	\item For $x \le n$ \lstinline{factorise(x))} then returns the prime factorisation of $x$ in $O(\log x)$ time.
+	\item \lstinline{phi[x]} denotes the Euler phi function of $x$
+	\item Useful identities:
+	\begin{itemize}
+		\item $\sum_{d | n} \phi(d) = n$
+		\item $i \star \mu = \mu \star i = \epsilon$ or alternatively $g \star i = f \Leftrightarrow g = f \star \mu$
+		\item $f,g$ are multiplicative $\Rightarrow$ $f\cdot g$, $f\star g$ are multiplicative
+		\item $\left(\frac{a}{p}\right) = a^{\frac{p-1}{2}} \equiv \pm 1 \mod p$ for some prime $p > 2$. $a$ is a quadratic residue if and only if $\left(\frac{a}{p}\right) = 1$
+		\item $\left(\frac{q}{p}\right) = \left(\frac{p}{q}\right)\cdot\begin{cases}+1 & p \equiv 1 \mod 4 \text{ or } q \equiv 1 \mod 4\\ -1 & p \equiv q \equiv 3 \mod 4 \end{cases}$
+	\end{itemize}
+\end{itemize}

@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Fools and Roads",
+      "file": "problem-codeforces-fools-and-roads.cpp",
+      "url": "https://codeforces.com/contest/191/problem/C",
+      "constraints": "n <= 100000, q <= 100000",
+      "time": "0.546 s",
+      "memory": "28.5 MB"
+    }
+  ]
+}

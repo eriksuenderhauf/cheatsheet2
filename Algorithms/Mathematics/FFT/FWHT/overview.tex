@@ -1,0 +1,8 @@
+\begin{itemize}
+	\item calculates the FWH transform (also known as xor-transform) of the polynomial $A$ in $O(n\log n)$.
+  \item This is the same as a multidimensional DFT of size $2\times\cdots\times2$. The DFT for a single dimension can be hardcoded.
+  \item The DFT for a single dimension is the same as multiplying by the Hadamard Matrix $H = \begin{pmatrix}1 & 1\\1 & -1\end{pmatrix}$. Applying the inverse transform is the same as multiplying by the inverse of this matrix.
+  \item Use $\begin{pmatrix}0 & 1\\1 & 1\end{pmatrix}$ for the \textbf{and} transform and $\begin{pmatrix}1 & 1\\1 & 0\end{pmatrix}$ for the \textbf{or} transform. Remember that those two matrices are in $SL(2)$, hence you don't have to divide by $n$ for the inverse transform.
+  \item Application: Calculate $c_k = \sum_{i\oplus j=k} a_ib_j$ fast. Also the or transform is almost the same as sum over all submasks.
+  \item We can also generalize this idea to addition mod $m$ in base $m$ (so $i\oplus_mj=k$). We therefore have to evaluate all the $\log_m n$ polynomials at all $m-$th primitive roots of unity.
+\end{itemize}

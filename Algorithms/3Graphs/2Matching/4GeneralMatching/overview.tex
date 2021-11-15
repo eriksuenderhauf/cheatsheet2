@@ -1,0 +1,5 @@
+\textbf{Tutte's theorem:} Given an undirected graph on $n$ vertices, without self-loops. Consider an $n \times n$ matrix $A$, where $A_{i,j} = 0$, if there's no edge between $i$ and $j$. Otherwise let $i < j$ and define $A_{i,j} = x_{i,j}$, $A_{j,i} = -x_{i,j}$, where $x_{i,j}$ is some variable. Tutte's theorem states, that $G$ has a perfect matching iff $det(A) \ne 0$ (the $0$ polynomial, in terms of $x_{i,j}$). This leads to a randomised $O(n^3)$ algorithm: Replace the $x_{i,j}$'s with random numbers and compute the determinant. This is supposedly slower than Edmond's blossom, but probably shorter to implement/still good to know.
+
+\textbf{Edmond's blossom:} \lstinline{matching(N, G)} computes the maximum matching in the given graph on $N$ vertices (0-indexed), represented by the adjacency list G and returns it's size (also stored in ret). Vertex $i$ is matched with \lstinline{mate[i]} (or -1). \lstinline{const static int N} denotes the maximum number of vertices. 
+
+Complexity: $O(n^3)$

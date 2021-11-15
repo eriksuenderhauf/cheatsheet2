@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Ada and Substring",
+      "file": "spoj-adastrng.cpp",
+      "url": "https://www.spoj.com/problems/ADASTRNG/",
+      "constraints": "n <= 300000",
+      "time": "1.09 s",
+      "memory": "11 MB"
+    }
+  ]
+}

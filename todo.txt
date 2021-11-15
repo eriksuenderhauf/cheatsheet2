@@ -1,0 +1,5 @@
+kd-tree
+delaunay triangulation
+advanced eertree
+matroid intersection
+half plane intersection

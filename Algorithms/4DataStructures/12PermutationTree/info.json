@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "CodeChef Good Subsequences",
+      "file": "problem-codechef-good-subsequences.cpp",
+      "url": "https://www.codechef.com/problems/GOODSEGS",
+      "constraints": "n <= 300000",
+      "time": "0.29 s",
+      "memory": "20.9 MB"
+    }
+  ]
+}

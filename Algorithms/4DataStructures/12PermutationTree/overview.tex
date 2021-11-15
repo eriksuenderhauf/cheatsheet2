@@ -1,0 +1,5 @@
+\begin{itemize}
+	\item Builds the Permutation tree for a given permutation in $O(n\log{n})$ time and $O(n)$ space.
+  \item \textit{cmb} stores whether the node is a combine node or not. If so, then every subarray of consecutive children satisfies: $\max_{[l,r]}P_i - \min_{[l,r]}P_i = r - l$
+  \item Only a segment tree which supports addition on a segment and finding the index with the global minimum is needed.
+\end{itemize}

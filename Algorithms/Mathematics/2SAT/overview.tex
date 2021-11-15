@@ -1,0 +1,10 @@
+2-SAT on $n$ variables $0, \dots n-1$. Negated variables are represented by bit-inversion (\lstinline{~x}). Usage:
+\begin{lstlisting}
+TwoSat ts(n);
+ts.either(0, ~3) // var 0 true or var 3 false
+ts.set_value(2); // var 2 true
+ts.at_most_one({0,~1,2});
+ts.solves() // true iff solveable
+ts.values[0..n-1] holds the assignment
+\end{lstlisting}
+Complexity: $O(N+E)$ for $N$ variables and $E$ clauses.

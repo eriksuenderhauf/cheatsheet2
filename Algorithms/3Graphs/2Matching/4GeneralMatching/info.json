@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Codeforces Angle Beats",
+      "file": "problem-codeforces-angle-beats.cpp",
+      "url": "https://codeforces.com/gym/102268/problem/A",
+      "constraints": "n <= 20'000, m <= 80'000, grid graph",
+      "time": "0.233 s",
+      "memory": "1300 KB"
+    },
+  ]
+}

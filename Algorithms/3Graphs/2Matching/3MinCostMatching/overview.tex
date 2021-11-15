@@ -1,0 +1,7 @@
+\begin{itemize}
+	\item Input: $n\times m$ cost matrix with (positive or negative) values
+	\item The matrix has to be 1-indexed, so add a dummy row/column
+	\item Find a minimal-cost perfect matching in $O(nm^2)$ time and $O(nm)$ space (matches column $i$ with $\mathtt{mt}[i]$)
+  \item Also finds labels $s, t$, such that $t_i + s_j \leq A_{ij}$.
+	\item Output: cost of the matching
+\end{itemize}

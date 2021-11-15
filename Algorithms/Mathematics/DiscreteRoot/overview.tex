@@ -1,0 +1,5 @@
+\begin{itemize}
+	\item Return $x$ such that $x^k \equiv a \mod m$.
+	\item Let $g$ be a primitive root modulo $m$. Then $g^y \equiv x \mod m$ for some $y$ and hence, $\left(g^k\right)^y \equiv \left(g^{y}\right)^k \equiv x^k \equiv a \mod m$. Thus, it is sufficient to compute $y = \operatorname{dlog}_{(g^k)}a$ in order to find $x \equiv g^y \mod m$. The discrete log takes time $O\left(m \log m\right)$.
+	\item A solution exists iff the discrete log exists. In this case, all solutions are of the form $x = g^{y + i\frac{ \phi \left(n\right)}{\gcd\left(k,  \phi \left(n\right)\right)}}$ for some integer $i$.
+\end{itemize}

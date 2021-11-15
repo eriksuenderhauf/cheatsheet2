@@ -1,0 +1,5 @@
+\begin{itemize}
+	\item $g$ is a primitive root modulo $m$ if, for every $a$ coprime to $m$, there exists some $k$ such that $g^k \equiv a \mod m$.
+	\item A primitive root modulo $m$ exists iff $m \in \left\{1, 2, 4\right\}$ or $m = p^k$ or $m = 2 \cdot p^k$ for some prime $p \neq 2$ and $k \geq 1$. In this case, the number of primitive roots is $\phi \left( \phi \left(m\right)\right)$.
+	\item Runtime: $\mathcal{O}(\sqrt{m}+x \cdot \log^2(m))$, where $x$ is the number of iterations until a root is found. In practice that should only be a couple of iterations.
+\end{itemize}

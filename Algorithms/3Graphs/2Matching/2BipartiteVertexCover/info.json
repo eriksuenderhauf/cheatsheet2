@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "CodeChef Ada Pawns",
+      "file": "problem-codechef-ada-pawns.cpp",
+      "url": "https://www.codechef.com/problems/ADAPWN",
+      "constraints": "n <= 100000, m <= 100000",
+      "time": "0.01 s",
+      "memory": "15.1 MB"
+    }
+  ]
+}

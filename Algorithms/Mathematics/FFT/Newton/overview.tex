@@ -1,0 +1,14 @@
+\begin{itemize}
+	\item Solves the equation $f(A(x)) = 0$ (finds the first coefficients of $A(x)$)
+  \item Start with some function $A_0(x)$ which solves the equation mod $x$
+  \item $A_{k+1}(x) = A_{k}(x) - \frac{f(A_{k}(x))}{f'(A_{k}(x))}$ is a solution mod $x^{2^{k+1}}$
+	\item Runtime $O\left(T(n)\right)$ to evaluate the first $n$ coefficients, if it takes $T(n)$ to evaluate $f(A(x)) / f'(A(x))$
+  \item Examples: ($Q$ is given)
+  \begin{itemize}
+    \item Find $A = Q^{-1}$, $f(A) = A^{-1} - Q \Rightarrow A_{k+1} = 2A_{k} - A_{k}^2Q$
+    \item Find $A = \mathrm{exp}(Q)$, $f(A) = \mathrm{ln}(A) - Q \Rightarrow A_{k+1} = A_{k}(1 - \mathrm{ln}(A_k) + Q)$ Note that $\mathrm{ln}(A) = \int\frac{A'}{A}\mathrm{d}x$
+    \item Find $A = Q^\alpha$, $f(A) = A^{1/\alpha} - Q \Rightarrow A_{k+1} = A_{k} - \alpha (A_{k}^{1/\alpha} - Q) A_{k}^{1 - 1/\alpha}$ Note that you should be able to calculate $\sqrt[\alpha]{Q(0)}$. Alternatively you can calculate $\mathrm{exp}(\alpha\mathrm{ln}(Q))$.
+  \end{itemize}
+
+  \item This can be extended to first order ODEs $x'(t) = f(x)$. Looking at the Taylorexpansion of $f$ we obtain: $$x_{2n}' \equiv\ f(x_n) + f'(x_n)(x_{2n}-x_n)\ \mathrm{mod}\ t^{2n}$$ This reduces with the integrating factor $\mu = e^{-\int f'(x_n)}$ to $(x_{2n}\mu)' \equiv\ (f(x_n) - f'(x_n) x_n) \mu\ \mathrm{mod}\ t^{2n}$
+\end{itemize}
