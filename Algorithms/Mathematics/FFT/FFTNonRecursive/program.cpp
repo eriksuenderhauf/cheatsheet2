@@ -1,3 +1,8 @@
+#include <bits/stdc++.h>
+#define sz(x) (int)(x).size()
+const double pi = acos(-1);
+using namespace std;
+
 //for extra speed use follwoing custom complex type
 struct cpx {
   double a=0,b=0;
@@ -54,4 +59,29 @@ void fft(vector<cd> & a, int inv) {
   if (inv)
     for (cd & x : a)
       x /= n;
+}
+
+void mul(vector<cd>& a, vector<cd>& b) {
+  int n = 1, s = sz(a) + sz(b) - 1;
+  while ((1 << n - 1) < max(sz(a), sz(b))) n++;
+  a.resize(1 << n);
+  b.resize(1 << n);
+  fft(a, 0), fft(b, 0);
+  for (int i = 0; i < sz(a); i++)
+    a[i] = a[i] * b[i];
+  fft(a, 1);
+  a.resize(s);
+}
+
+int main() {
+  ios_base::sync_with_stdio(false); cin.tie(0);
+  int n, m; cin >> n >> m;
+  vector<cd> a(n), b(m);
+  for (int i = 0; i < n; i++)
+    cin >> a[i].a;
+  for (int i = 0; i < m; i++)
+    cin >> b[i].a;
+  mul(a, b);
+  for (int i = 0; i < (int)a.size(); i++)
+    cout << a[i].a << "\n";
 }

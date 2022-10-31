@@ -87,13 +87,12 @@ ll g(ll k) {
 
 int main() {
   ios_base::sync_with_stdio(false); cin.tie(0);
-  int n; cin >> n; n++;
-  vector<int> p(n + 1,0);
-  p[0] = 1;
-  for (int i = 0; g(i) <= n; i++)
-    p[g(i)] = (i & 1 ? mod - 1 : 1);
-  for (int i = 0; g(-i) <= n; i++)
-    p[g(-i)] = (i & 1 ? mod - 1 : 1);
-  p = invert(p, n + 1);
-  cout << (p[n] - 1 + mod) % mod << "\n";
+  int n; cin >> n;
+  vector<int> p(n);
+  for (int& i: p)
+    cin >> i;
+  p = invert(p, n);
+  for (int i: p)
+    cout << i << " ";
+  cout << endl;
 }

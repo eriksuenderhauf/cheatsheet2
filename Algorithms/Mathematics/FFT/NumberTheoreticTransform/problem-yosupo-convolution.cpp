@@ -1,7 +1,21 @@
+#include <bits/stdc++.h>
+#define sz(x) (int)(x).size()
+#define Poly vector<int>
+const double pi = acos(-1);
+using namespace std;
+
 const int mod = 998244353; // 119 * 2^23 + 1
 const int root = 15311432; // 3^119
 const int iroot = 469870224; // 1 / root
 const int root_pw = 1 << 23;
+
+int pw(int x, int y) {
+	int r = 1;
+	for (; y; y /= 2, x = x * 1ll * x % mod)
+		if (y & 1)
+			r = r * 1ll * x % mod;
+	return r;
+}
 
 void fft(Poly& a, int inv = 0) {
 	int n = sz(a);
@@ -27,19 +41,33 @@ void fft(Poly& a, int inv = 0) {
 	if (inv) {
 		n = pw(n, mod - 2);
 		for (int& i: a)
-			i = n * 1ll * i % mod;
+			i = i * 1ll * n % mod;
 	}
 }
 
-Poly operator*(Poly x, Poly y) {
-	int n = 2, s = sz(x) + sz(y) - 1;
-	while (n / 2 < max(sz(x), sz(y))) n *= 2;
-	x.resize(n);
-	y.resize(n);
-	fft(x), fft(y);
+Poly operator*(Poly a, Poly b) {
+	int n = 2, s = sz(a) + sz(b) - 1;
+	while (n / 2 < max(sz(a), sz(b))) n *= 2;
+	a.resize(n);
+	b.resize(n);
+	fft(a), fft(b);
 	for (int i = 0; i < n; i++)
-		x[i] = x[i] * 1ll * y[i] % mod;
-	fft(x, 1);
-	x.resize(s);
-	return x;
+		a[i] = a[i] * 1ll * b[i] % mod;
+	fft(a, 1);
+	a.resize(s);
+	return a;
+}
+
+int main() {
+  ios_base::sync_with_stdio(false); cin.tie(0);
+  int n, m; cin >> n >> m;
+  Poly a(n), b(m);
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  for (int i = 0; i < m; i++)
+    cin >> b[i];
+  a = a * b;
+  for (int i = 0; i < n + m - 1; i++)
+    cout << a[i] << " ";
+  cout << endl;
 }

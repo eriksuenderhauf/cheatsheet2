@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Multipoint Evaluation",
+      "file": "problem-yosupo-multipoint-evaluation.cpp",
+      "url": "https://judge.yosupo.jp/problem/multipoint_evaluation",
+      "constraints": "n <= 2^17",
+      "time": "1.708 s",
+      "memory": "52.58 MB"
+    },
+  ]
+}

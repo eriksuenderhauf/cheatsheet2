@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Convolution",
+      "file": "problem-yosupo-convolution.cpp",
+      "url": "https://judge.yosupo.jp/problem/convolution_mod",
+      "constraints": "n,m <= 2^19",
+      "time": "0.283 s",
+      "memory": "16.33 MB"
+    },
+  ]
+}

@@ -1,0 +1,6 @@
+\begin{itemize}
+  \item Implements a queue using a single stack.
+	\item TODO: Implement a data structure, which supports applying updates and undoing the last update in a commutative way, i.e., \texttt{undo(), apply(o)} has the same effect as \texttt{apply(o), undo()}.
+  \item Application: This trick allows for queue-like undoing of updates.
+  \item If there are $q$ \texttt{push} and \texttt{pop} operations, then this trick does $\mathcal{O}(q\log q)$ \texttt{apply} and \texttt{undo} operations on the data structure.
+\end{itemize}

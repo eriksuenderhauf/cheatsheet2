@@ -1,0 +1,12 @@
+{
+  "verification": [
+    {
+      "problem": "Characteristic Polynomial",
+      "file": "problem-yosupo-char-polynomial.cpp",
+      "url": "https://judge.yosupo.jp/problem/characteristic_polynomial",
+      "constraints": "n <= 500",
+      "time": "0.287 s",
+      "memory": "2.03 MB"
+    },
+  ]
+}

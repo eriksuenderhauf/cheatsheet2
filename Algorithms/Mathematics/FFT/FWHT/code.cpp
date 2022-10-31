@@ -1,5 +1,5 @@
-void fwht(vector<int>& a, bool inv = 0) {
-  int n = int(a.size()); assert((n&-n) == 0);
+void fwht(vector<int>& a, int inv = 0) {
+  int n = sz(a); assert((n&-n) == n);
   for (int i = 2; i <= n; i *= 2)
     for (int j = 0; j < n; j += i)
       for (int k = j; k < j+i/2; k++) {
@@ -9,7 +9,7 @@ void fwht(vector<int>& a, bool inv = 0) {
       }
   if (inv) {
     n = pw(n, mod-2);
-    for (int i = 0; i < n; i++)
-      a[i] = a[i] * 1ll * n % mod;
+    for (int& i: a)
+      i = i * 1ll * n % mod;
   }
 }

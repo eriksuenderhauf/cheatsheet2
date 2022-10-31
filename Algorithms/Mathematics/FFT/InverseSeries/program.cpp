@@ -1,90 +1,64 @@
 #include <bits/stdc++.h>
 #define sz(x) (int)(x).size()
+#define Poly vector<int>
 #define pb push_back
 typedef long long ll;
 using namespace std;
-const int MOD = 998244353;
+const int mod = 998244353;
 const int root = 15311432;
 const int iroot = 469870224;
 const int mxpw = 1 << 23;
 
-int pw(int a, int b) {
+int pw(int x, int y) {
   int r = 1;
-  while (b)
-    if (b & 1)
-      r = (ll)r * (ll)a%MOD, b--;
-    else
-      a = (ll)a * (ll)a%MOD, b /= 2;
+  for (; y; y /= 2, x = x * 1ll * x % mod)
+    if (y & 1)
+      r = x * 1ll * r % mod;
   return r;
 }
-
-void fft(vector<int>& x, bool inv) {
-  int n = sz(x);
-  for (int i = 1, j = 0; i < n; i++) {
-    int bit = n>>1;
-    for (; j & bit; bit /= 2)
-      j ^= bit;
-    j ^= bit;
-    if (i < j)
-      swap(x[i], x[j]);
-  }
-  vector<int> tmp;
-  int cw = inv ? iroot : root;
-  for (int i = 2; i < mxpw; i *= 2) {
-    cw = (ll)cw * (ll)cw % MOD;
-    tmp.pb(cw);
-  }
-  int id = sz(tmp)-1;
-  for (int i = 2; i <= n; i *= 2) {
-    cw =  tmp[id--];
-    for (int j = 0; j < n; j += i) {
-      for (int k = j, w = 1; 2*(k-j) < i; k++) {
-        int a = x[k], b = (ll)w * (ll)x[k+i/2]%MOD;
-        x[k] = a+b-(a+b<MOD?0:MOD), x[k+i/2] = a-b+(a-b<0?MOD:0);
-        w = (ll)w * (ll)cw % MOD;
-      }
-    }
-  }
-  if (inv) {
-    n = pw(n, MOD-2);
-    for (int& t: x)
-      t = (ll)t * (ll)n % MOD;
-  }
+// returns the coefficients [l, r[ of p
+Poly range(const Poly& p, int l, int r) {
+  return Poly(p.begin()+l, p.begin()+min(r,sz(p)));
 }
-
-vector<int> mul(vector<int> x, vector<int> y) {
-  int m = 1; while (m < max(sz(x), sz(y))) m *= 2;
-  x.resize(m*2); y.resize(m*2);
-  fft(x, 0), fft(y, 0);
+// replace with fft
+Poly operator*(const Poly& x, const Poly& y) {
+  Poly r(sz(x) + sz(y) - 1);
   for (int i = 0; i < sz(x); i++)
-    x[i] = (ll)x[i]*(ll)y[i]%MOD;
-  fft(x, 1);
-  return x;
+    for (int j = 0; j < sz(y); j++)
+      r[i + j] = (r[i + j] + x[i] * 1ll * y[j]) % mod;
+  return r;
 }
-
-vector<int> inv(vector<int> x, int n) {
-  vector<int> ret(1,pw(x[0], MOD-2));
+Poly operator+(const Poly& x, const Poly& y) {
+  Poly r = x; r.resize(max(sz(x), sz(y)));
+  for (int i = 0; i < sz(y); i++)
+    r[i] = (r[i] + y[i]) % mod;
+  return r;
+}
+Poly operator-(const Poly& x, const Poly& y) {
+  Poly r = x; r.resize(max(sz(x), sz(y)));
+  for (int i = 0; i < sz(y); i++)
+    r[i] = (r[i] - y[i] + mod) % mod;
+  return r;
+}
+Poly invert(const Poly& x, int s) {
+  Poly ret = {pw(x[0], mod - 2)};
   int k = 1;
-  for (; k < n; k *= 2) {
-    vector<int> tmp = mul(mul(ret, ret), vector<int>(x.begin(), x.begin() + min(2*k,sz(x)-1) + 1));
-    for (int i = 0; i < sz(tmp); i++) {
-      tmp[i] = (i < sz(ret) ? 2 * ret[i] : 0) - tmp[i];
-      tmp[i] += tmp[i] < 0 ? MOD : (tmp[i] >= MOD ? -MOD : 0);
-    }
-    tmp.resize(2 * k); ret = tmp;
+  for (; k < s; k *= 2) {
+    ret = ret + ret - (ret * ret) * range(x, 0, 2 * k);
+    ret.resize(2 * k);
   }
-  ret.resize(n);
+  ret.resize(s);
   return ret;
 }
 
 int main() {
+  ios_base::sync_with_stdio(false); cin.tie(0);
   int n, m; cin >> n >> m;
-  vector<int> pol(n+1,0);
+  vector<int> p(n + 1,0);
   for (int i = 0; i <= n; i++)
-    cin >> pol[i];
-  pol = inv(pol, m);
-  for (int x: pol)
+    cin >> p[i];
+  p = invert(p, m);
+  for (int x: p)
     cout << x << " ";
   cout << "\n";
-  return 0;
 }

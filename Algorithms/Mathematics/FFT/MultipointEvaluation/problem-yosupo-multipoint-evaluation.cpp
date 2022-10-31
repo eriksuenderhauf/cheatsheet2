@@ -3,7 +3,10 @@
 #define all(x) (x).begin(), (x).end()
 #define Poly vector<int>
 using namespace std;
-const int mod = 998244353;
+const int mod = 998244353; // 119 * 2^23 + 1
+const int root = 15311432; // 3^119
+const int iroot = 469870224; // 1 / root
+const int root_pw = 1 << 23;
 
 int pw(int x, int y) {
   int r = 1;
@@ -12,17 +15,48 @@ int pw(int x, int y) {
       r = x * 1ll * r % mod;
   return r;
 }
+void fft(Poly& a, int inv = 0) {
+  int n = sz(a);
+  for(int i = 1, j = 0; i < n; i++) {
+    int bit = n >> 1;
+    for (j ^= bit; !(j&bit); j ^= (bit>>=1));
+    if (i < j)
+      swap(a[i], a[j]);
+  }
+  for(int l = 1; 2 * l <= n; l *= 2) {
+    int wl = inv ? iroot : root;
+    for (int i = l; 2 * i < root_pw; i *= 2)
+      wl = wl * 1ll * wl % mod;
+    for(int i = 0; i < n; i += 2 * l) {
+      for (int j = i, w = 1; j < i + l; j++) {
+        int u = a[j], v = a[j+l]*1ll*w % mod;
+        a[j] = u+v < mod ? u+v : u+v-mod;
+        a[j + l] = u-v < 0 ? u-v+mod : u-v;
+        w = w * 1ll * wl % mod;
+      }
+    }
+  }
+  if (inv) {
+    n = pw(n, mod - 2);
+    for (int& i: a)
+      i = n * 1ll * i % mod;
+  }
+}
 // returns the coefficients [l, r[ of p
 Poly range(const Poly& p, int l, int r) {
   return Poly(p.begin()+l, p.begin()+min(r,sz(p)));
 }
-// replace with fft
-Poly operator*(const Poly& x, const Poly& y) {
-  Poly r(sz(x) + sz(y) - 1);
-  for (int i = 0; i < sz(x); i++)
-    for (int j = 0; j < sz(y); j++)
-      r[i + j] = (r[i + j] + x[i] * 1ll * y[j]) % mod;
-  return r;
+Poly operator*(Poly x, Poly y) {
+  int n = 2, s = sz(x) + sz(y) - 1;
+  while (n / 2 < max(sz(x), sz(y))) n *= 2;
+  x.resize(n);
+  y.resize(n);
+  fft(x), fft(y);
+  for (int i = 0; i < n; i++)
+    x[i] = x[i] * 1ll * y[i] % mod;
+  fft(x, 1);
+  x.resize(s);
+  return x;
 }
 Poly operator+(const Poly& x, const Poly& y) {
   Poly r = x; r.resize(max(sz(x), sz(y)));
@@ -65,13 +99,15 @@ Poly evaluate(const Poly& x, Poly b) {
 }
 
 int main() {
-  Poly p({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-  vector<int> b({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-  auto r = evaluate(p, b);
-  for (int i = 0; i < sz(b); i++) {
-    int v = 0;
-    for (int j = sz(p)-1; ~j; j--)
-      v = (v * 1ll * b[i] + p[j]) % mod;
-    cout << r[i] << " " << v << "\t" << r[i] - v << endl;
-  }
+  ios_base::sync_with_stdio(false); cin.tie(0);
+  int n, m; cin >> n >> m;
+  Poly a(n), b(m);
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  for (int i = 0; i < m; i++)
+    cin >> b[i];
+  Poly c = evaluate(a, b);
+  for (int i: c)
+    cout << i << " ";
+  cout << endl;
 }

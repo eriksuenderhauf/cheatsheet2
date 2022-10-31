@@ -1,122 +1,72 @@
-// Codeforces Task 1096G - Lucky Tickets
-
 #include <bits/stdc++.h>
-
+#define sz(x) (int)(x).size()
+#define Poly vector<int>
+const double pi = acos(-1);
 using namespace std;
 
-typedef long long ll;
+const int mod = 998244353; // 119 * 2^23 + 1
+const int root = 15311432; // 3^119
+const int iroot = 469870224; // 1 / root
+const int root_pw = 1 << 23;
 
-// return a % b (positive value)
-ll mod(ll a, ll m) {
-	return ((a % m) + m) % m;
+int pw(int x, int y) {
+	int r = 1;
+	for (; y; y /= 2, x = x * 1ll * x % mod)
+		if (y & 1)
+			r = r * 1ll * x % mod;
+	return r;
 }
 
-// returns d = gcd(a,b); finds x,y such that d = ax + by
-int extended_euclid(int a, int b, int &x, int &y) {
-	int xx = y = 0;
-	int yy = x = 1;
-	while(b) {
-		int q = a / b;
-		int t = b;
-		b = a % b;
-		a = t;
-		t = xx;
-		xx = x - q * xx;
-		x = t;
-		t = yy;
-		yy = y - q * yy;
-		y = t;
-	}
-	return a;
-}
-
-// computes b such that ab = 1 (mod n), returns -1 on failure
-int mod_inverse(int a, int n) {
-	int x, y;
-	int d = extended_euclid(a, n, x, y);
-	if(d > 1) return -1;
-	return mod(x, n);
-}
-
-// return a^b mod m
-ll powmod(ll a, ll b, ll m) {
-	ll res = 1;
-	while(b > 0)
-		if(b & 1)
-			res = (res * a) % m, --b;
-		else
-			a = (a * a) % m, b >>= 1;
-	return res % m;
-}
-
-const int MOD = 998244353; // 119 * 2^23 + 1
-const int root = 565042129; // 3^(119 * 2^3)
-const int root_pw = 1 << 20; // order of root
-const int root_1 = mod_inverse(root, MOD);
-
-void fft(vector<int> & a, bool invert) {
-	int n = a.size();
-
+void fft(Poly& a, int inv = 0) {
+	int n = sz(a);
 	for(int i = 1, j = 0; i < n; i++) {
 		int bit = n >> 1;
-		for(; j & bit; bit >>= 1)
-			j ^= bit;
-		j ^= bit;
-
-		if(i < j)
+		for (j ^= bit; !(j&bit); j ^= (bit>>=1));
+		if (i < j)
 			swap(a[i], a[j]);
 	}
-
-	for(int len = 2; len <= n; len <<= 1) {
-		int wlen = invert ? root_1 : root;
-		for(int i = len; i < root_pw; i <<= 1)
-			wlen = (int)(1LL * wlen * wlen % MOD);
-
-		for(int i = 0; i < n; i += len) {
-			int w = 1;
-			for(int j = 0; j < len / 2; j++) {
-				int u = a[i + j], v = (int)(1LL * a[i + j + len / 2] * w % MOD);
-				a[i + j] = u + v < MOD ? u + v : u + v - MOD;
-				a[i + j + len / 2] = u - v >= 0 ? u - v : u - v + MOD;
-				w = (int)(1LL * w * wlen % MOD);
+	for(int l = 1; 2 * l <= n; l *= 2) {
+		int wl = inv ? iroot : root;
+		for (int i = l; 2 * i < root_pw; i *= 2)
+			wl = wl * 1ll * wl % mod;
+		for(int i = 0; i < n; i += 2 * l) {
+			for (int j = i, w = 1; j < i + l; j++) {
+				int u = a[j], v = a[j+l]*1ll*w % mod;
+				a[j] = u+v < mod ? u+v : u+v-mod;
+				a[j + l] = u-v < 0 ? u-v+mod : u-v;
+				w = w * 1ll * wl % mod;
 			}
 		}
 	}
-
-	if(invert) {
-		int n_1 = mod_inverse(n, MOD); // modular inverse
-		for(int & x : a)
-			x = (int)(1LL * x * n_1 % MOD);
+	if (inv) {
+		n = pw(n, mod - 2);
+		for (int& i: a)
+			i = i * 1ll * n % mod;
 	}
 }
 
+Poly operator*(Poly a, Poly b) {
+	int n = 2, s = sz(a) + sz(b) - 1;
+	while (n / 2 < max(sz(a), sz(b))) n *= 2;
+	a.resize(n);
+	b.resize(n);
+	fft(a), fft(b);
+	for (int i = 0; i < n; i++)
+		a[i] = a[i] * 1ll * b[i] % mod;
+	fft(a, 1);
+	a.resize(s);
+	return a;
+}
+
 int main() {
-	ios_base::sync_with_stdio(false);
-	cout << setprecision(12) << fixed;
-
-	int n, k;
-	cin >> n >> k;
-	vector <int> f(root_pw, 0);
-
-	for(int i = 0; i < k; ++i) {
-		int d;
-		cin >> d;
-		f[d]++;
-	}
-	n /= 2;
-
-	fft(f, false);
-
-	for(int i = 0; i < root_pw; ++i) {
-		f[i] = powmod(f[i], n, MOD);
-	}
-	fft(f, true);
-	ll result = 0;
-	for(auto x : f) {
-		result += ((ll)x) * x;
-		result %= MOD;
-	}
-	cout << result << endl;
-
-	return 0;
+  ios_base::sync_with_stdio(false); cin.tie(0);
+  int n, m; cin >> n >> m;
+  Poly a(n), b(m);
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  for (int i = 0; i < m; i++)
+    cin >> b[i];
+  a = a * b;
+  for (int i = 0; i < sz(a); i++)
+    cout << a[i] << "\n";
 }
